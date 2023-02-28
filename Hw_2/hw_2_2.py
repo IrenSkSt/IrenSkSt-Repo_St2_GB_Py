@@ -7,7 +7,7 @@ num_mult = int(input("Произведение 2х чисел: "))
 list_x = []
 list_y = []
 
-temp = (num_summ**2) - (4*num_mult)
+temp = (num_summ**2) - (4*num_mult)  # Решение через Дискриминант (все формулы)
 print("D =", num_summ**2, " - ", 4*num_mult, " = ", temp)  # для проверки
 
 if temp < 0:
@@ -19,7 +19,7 @@ else:
     x1 = int((num_summ + temp**(1/2))/2)
     y1 = int(num_summ-x1)
     i = 0
-    print(x1, y1)  # для проверки
+    # print(x1, y1)  # для проверки
 
     if y1 != 0:
         list_x.append(x1)
@@ -29,15 +29,15 @@ else:
     if temp > 0:
         x2 = int((num_summ - temp**(1/2))/2)
         y2 = int(num_summ-x2)
-        print(x2, y2)  # для проверки
-        if y2 != 0:
+        # print(x2, y2)  # для проверки
+        if y2 != 0 or y2 != int(list_x[0]):
             list_x.append(x2)
             list_y.append(y2)
+            # print(list_x[0])  # для проверки
 
-for i in range(len(list_x)):
-    print(f"Ответ {i+1}: {list_x[i]} и {list_y[i]}")
+    for i in range(len(list_x)):
+        print(f"Ответ {i+1}: {list_x[i]} и {list_y[i]}")
 
-    print("Сумма = ", list_x[i] + list_y[i],
-          "Произведение = ", list_x[i] * list_y[i])  # для проверки
+    # print("Сумма = ", list_x[i] + list_y[i], "Произведение = ", list_x[i] * list_y[i])  # для проверки
 
-print("x =", list_x, "y =", list_y)  # для проверки
+# print("x =", list_x, "y =", list_y)  # для проверки
