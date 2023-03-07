@@ -14,5 +14,4 @@ print(sum(list_arr[i] == num for i in range(count)))
 
 # 2й вариант (в этом случае нет необходимости спрашивать сколько элементов в массиве - он сразу их вводит)
 # list_arr = [int(i) for i in input().split()]
-# print(list_arr)
 # print(sum(list_arr[i] == num for i in range(len(list_arr))))
