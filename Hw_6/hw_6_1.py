@@ -3,3 +3,25 @@
 # Формула для получения n-го члена прогрессии: an = a1 + (n-1) * d. /Условие не понятно!/
 # Каждое число вводится с новой строки.
 # Пример: Ввод = 7 2 5 Вывод = 7 9 11 13 15
+
+
+m = int(input("Кол-во элементов в массиве: "))
+d = int(input("Разность между соседними элементами: "))
+# list_num = [int(input("Укажите 1й элемент массива: "))]
+# # print(list_num)
+
+# [list_num.append(list_num[i-1]+d) for i in range(1, m)]
+
+# print(list_num)
+
+
+# развернутый вариант:
+# for i in range(1, m):
+#     list_num.append(list_num[i-1]+d)
+
+# print(list_num)
+
+
+# короткое решение:
+num1 = int(input("Укажите 1й элемент массива: "))
+print([num1 + i*d for i in range(m)])
