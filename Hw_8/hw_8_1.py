@@ -22,6 +22,8 @@ def read_records():
 
 
 def show_all():
+    global all_data
+    # print(all_data)  # для проверки
     if all_data:
         print(*all_data, sep="\n")
     else:
@@ -35,7 +37,7 @@ def add_new_contact():
     string = ""
 
     for i in array:
-        string += input(f"Enter: {i}") + " "
+        string += input(f"Enter {i}: ") + " "
     last_id += 1
 
     with open(file_base, 'a', encoding="utf-8") as f:
@@ -57,7 +59,7 @@ def main_menu():
                        "7. Exit\n")
         match answer:
             case "1":
-                show_all
+                show_all()
             case "2":
                 add_new_contact()
             case "3":
