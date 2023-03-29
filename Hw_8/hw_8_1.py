@@ -29,6 +29,31 @@ def show_all():
     else:
         print("Empty data")
 
+# -----------------------
+# Решение ДЗ - поиск контакта /реализовано пока на полное совпадение со строкой поиска/
+
+
+def show_contact(search_str):
+    global all_data
+
+    contact = []
+
+    # print(all_data)  # для проверки
+    for i in all_data:
+        # print(i)  # для проверки
+        item = i.lower().split()
+        for j in item:
+            for k in search_str:
+                if j == k:
+                    contact.append(i)
+
+    if len(contact) != 0:
+        print(*contact)
+
+    else:
+        print("Такого контакта не найдено")
+# -------------------------
+
 
 def add_new_contact():
     global last_id
@@ -63,7 +88,7 @@ def main_menu():
             case "2":
                 add_new_contact()
             case "3":
-                pass
+                show_contact(input("Search: ").lower().split())
             case "4":
                 pass
             case "5":
