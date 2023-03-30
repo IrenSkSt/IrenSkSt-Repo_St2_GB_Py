@@ -1,6 +1,7 @@
 from os import path
 
 file_base = 'base.txt'
+file_exp = 'My_Phone_book.txt'
 
 last_id = 0
 all_data = []
@@ -176,9 +177,14 @@ def insert_contact(search_str):
 # Решение ДЗ - Экспорт/Выгрузка телефонной книги в файл
 
 
-# def export_contact_list():
+def export_contact_list():
+    global all_data
 
-    # ------------------------
+    with open(file_exp, 'w', encoding="utf-8") as f:
+        for i in all_data:
+            f.write(f"{i}\n")
+    print("Список Ваших контактов выгружен в файл: My_Phone_book.txt ")
+# ------------------------
 
 
 def main_menu():
@@ -206,18 +212,18 @@ def main_menu():
             case "5":
                 del_contact(input("Какой контакт будем удалять? ").lower())
             case "6":
-                # choice = input(
-                #     "Выгрузить Список контактов в файл? (Y/N) ").upper()
-                # if choice == "Y":
-                #     export_contact_list()
-                # elif choice == "N":
-                #     choice = input(
-                #         "Загрузить Список контактов в файл? (Y/N) ").upper()
-                pass
-                # if choice == "Y":
-                #     import_contact_list()
-                # else:
-                #     print("Try again!\n")
+                choice = input(
+                    "Выгрузить Список контактов в файл? (Y/N) ").upper()
+                if choice == "Y":
+                    export_contact_list()
+                elif choice == "N":
+                    choice = input(
+                        "Загрузить Список контактов в файл? (Y/N) ").upper()
+                    pass
+                    # if choice == "Y":
+                    #     import_contact_list()
+                else:
+                    print("Try again!\n")
             case "7":
                 play = False
             case _:
