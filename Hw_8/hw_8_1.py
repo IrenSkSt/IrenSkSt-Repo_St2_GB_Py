@@ -87,21 +87,29 @@ def del_contact(search_str):
                 print(*i)
                 accept += input("Да/Нет (Y/N):  ").upper()
                 contact_del = i
-                print(contact_del)  # для проверки
+                # print(contact_del)  # для проверки
 
                 match accept:
                     case "Y" | "ДА":
-                        print("Удален: ")
-                        all_data.pop(i)
+                        # print("Удален: ")
+                        all_data.pop(all_data.index(i))
+                        # all_data.remove(i)
                         # return contact_del
+                        # return
                     case "N" | "НЕТ":
                         contact_del = []
                     case _:
                         print("Try again!\n")
 
     if len(contact_del) != 0:
-        # print("Этот контакт удален: ")
-        # print(*contact_del, sep="\n")
+
+        with open(file_base, 'w', encoding="utf-8") as f:
+            for i in all_data:
+                f.write(f"{i}\n")
+
+        # print(all_data)  # для проверки
+        print("Этот контакт удален: ")
+        print(*contact_del)
         contact_del = []
     else:
         print("Контакт для удаления не найден")
