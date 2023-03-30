@@ -71,6 +71,8 @@ def add_new_contact():
 
 # ------------------------
 # Решение ДЗ - Удаление контакта
+# /!!! реализовано пока на полное совпадение со строкой поиска контакта для удаления/ Напр.: bin
+
 def del_contact(search_str):
     global all_data
 
@@ -117,6 +119,68 @@ def del_contact(search_str):
 # ------------------------
 
 
+# ------------------------
+# Решение ДЗ - Изменение контакта
+# /!!! реализовано пока на полное совпадение со строкой поиска контакта для измения/ Напр.: name
+
+
+def insert_contact(search_str):
+    global all_data
+
+    array = ["surname", "name", "patronymic", "phone_number"]
+    contact_ins = ""
+    accept = ""
+
+    # print(all_data)  # для проверки
+    for i in all_data:
+        # print(i)  # для проверки
+        item = i.lower().split()
+        for j in item:
+            if j == search_str:
+                print("Вы хотите изменить этот контакт?")
+                print(*i)
+                accept += input("Да/Нет (Y/N):  ").upper()
+                contact_ins = i
+                # print(contact_ins)  # для проверки
+
+                match accept:
+                    case "Y" | "ДА":
+                        id = contact_ins.split()[0]
+                        # print(id)  # для проверки
+                        i_new = id + " "
+                        for m in array:
+                            i_new += input(f"Enter {m}: ") + " "
+                        all_data[all_data.index(i)] = i_new
+
+                    case "N" | "НЕТ":
+                        contact_ins = ""
+                    case _:
+                        print("Try again!\n")
+
+    if len(contact_ins) != 0:
+
+        with open(file_base, 'w', encoding="utf-8") as f:
+            for i in all_data:
+                f.write(f"{i}\n")
+
+        # print(all_data)  # для проверки
+        print("Контакт изменен на: ")
+        print(*i_new)
+        contact_ins = ""
+    else:
+        print("Контакт для изменения не найден")
+
+# ------------------------
+
+# ------------------------
+# Решение ДЗ - Экспорт/Выгрузка телефонной книги в файл
+
+
+# def export_contact_list():
+
+    # ------------------------
+
+
 def main_menu():
     play = True
 
@@ -138,11 +202,22 @@ def main_menu():
             case "3":
                 show_contact(input("Search: ").lower())
             case "4":
-                pass
+                insert_contact(input("Какой контакт будем изменять? ").lower())
             case "5":
                 del_contact(input("Какой контакт будем удалять? ").lower())
             case "6":
+                # choice = input(
+                #     "Выгрузить Список контактов в файл? (Y/N) ").upper()
+                # if choice == "Y":
+                #     export_contact_list()
+                # elif choice == "N":
+                #     choice = input(
+                #         "Загрузить Список контактов в файл? (Y/N) ").upper()
                 pass
+                # if choice == "Y":
+                #     import_contact_list()
+                # else:
+                #     print("Try again!\n")
             case "7":
                 play = False
             case _:
