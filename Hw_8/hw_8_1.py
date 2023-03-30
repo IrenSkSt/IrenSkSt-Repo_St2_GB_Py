@@ -30,7 +30,8 @@ def show_all():
         print("Empty data")
 
 # -----------------------
-# Решение ДЗ - поиск контакта /реализовано пока на полное совпадение со строкой поиска/
+# Решение ДЗ - ПОИСК НУЖНОГО контакта для просмотра (п.3 меню = Serch)
+# /!!! реализовано пока на полное совпадение со строкой поиска/Напр.: Иван, 123456, иван петрович/
 
 
 def show_contact(search_str):
@@ -43,12 +44,11 @@ def show_contact(search_str):
         # print(i)  # для проверки
         item = i.lower().split()
         for j in item:
-            for k in search_str:
-                if j == k:
-                    contact.append(i)
+            if j == search_str:
+                contact.append(i)
 
     if len(contact) != 0:
-        print(*contact)
+        print(*contact, sep="\n")
 
     else:
         print("Такого контакта не найдено")
@@ -67,6 +67,46 @@ def add_new_contact():
 
     with open(file_base, 'a', encoding="utf-8") as f:
         f.write(f"{last_id} {string}\n")
+
+
+# ------------------------
+# Решение ДЗ - Удаление контакта
+def del_contact(search_str):
+    global all_data
+
+    contact_del = []
+    accept = ""
+
+    # print(all_data)  # для проверки
+    for i in all_data:
+        # print(i)  # для проверки
+        item = i.lower().split()
+        for j in item:
+            if j == search_str:
+                print("Вы хотите удалить этот контакт?")
+                print(*i)
+                accept += input("Да/Нет (Y/N):  ").upper()
+                contact_del = i
+                print(contact_del)  # для проверки
+
+                match accept:
+                    case "Y" | "ДА":
+                        print("Удален: ")
+                        all_data.pop(i)
+                        # return contact_del
+                    case "N" | "НЕТ":
+                        contact_del = []
+                    case _:
+                        print("Try again!\n")
+
+    if len(contact_del) != 0:
+        # print("Этот контакт удален: ")
+        # print(*contact_del, sep="\n")
+        contact_del = []
+    else:
+        print("Контакт для удаления не найден")
+
+# ------------------------
 
 
 def main_menu():
@@ -88,11 +128,11 @@ def main_menu():
             case "2":
                 add_new_contact()
             case "3":
-                show_contact(input("Search: ").lower().split())
+                show_contact(input("Search: ").lower())
             case "4":
                 pass
             case "5":
-                pass
+                del_contact(input("Какой контакт будем удалять? ").lower())
             case "6":
                 pass
             case "7":
