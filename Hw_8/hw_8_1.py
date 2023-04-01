@@ -1,3 +1,4 @@
+import os
 from os import path
 
 file_base = 'base.txt'
@@ -5,6 +6,7 @@ file_exp = 'My_Phone_book.txt'
 
 last_id = 0
 all_data = []
+
 
 if not path.exists(file_base):
     with open(file_base, 'w', encoding="utf-8") as _:
@@ -30,7 +32,7 @@ def show_all():
     else:
         print("Empty data")
 
-# -----------------------
+# -----------**------------
 # Решение ДЗ - ПОИСК НУЖНОГО контакта для просмотра (п.3 меню = Serch)
 # /!!! реализовано пока на полное совпадение со строкой поиска/Напр.: Иван, 123456, иван петрович/
 
@@ -53,7 +55,7 @@ def show_contact(search_str):
 
     else:
         print("Такого контакта не найдено")
-# -------------------------
+# -----------***--------------
 
 
 def add_new_contact():
@@ -70,7 +72,7 @@ def add_new_contact():
         f.write(f"{last_id} {string}\n")
 
 
-# ------------------------
+# -----------**-------------
 # Решение ДЗ - Удаление контакта
 # /!!! реализовано пока на полное совпадение со строкой поиска контакта для удаления/ Напр.: bin
 
@@ -116,14 +118,12 @@ def del_contact(search_str):
         contact_del = []
     else:
         print("Контакт для удаления не найден")
+# -----------***-------------
 
-# ------------------------
 
-
-# ------------------------
+# ------------**------------
 # Решение ДЗ - Изменение контакта
 # /!!! реализовано пока на полное совпадение со строкой поиска контакта для измения/ Напр.: name
-
 
 def insert_contact(search_str):
     global all_data
@@ -170,12 +170,11 @@ def insert_contact(search_str):
         contact_ins = ""
     else:
         print("Контакт для изменения не найден")
+# -------------***-----------
 
-# ------------------------
 
-# ------------------------
+# -----------**-------------
 # Решение ДЗ - Экспорт/Выгрузка телефонной книги в файл
-
 
 def export_contact_list():
     global all_data
@@ -184,7 +183,35 @@ def export_contact_list():
         for i in all_data:
             f.write(f"{i}\n")
     print("Список Ваших контактов выгружен в файл: My_Phone_book.txt ")
-# ------------------------
+# -----------***-------------
+
+
+# -----------**-------------
+# Решение ДЗ - Импорт/Загрузка контактов в телефонную книгу из другого файла .txt
+# (имитация переноса с другого телефона без проверки дубликатов)
+
+def import_contact_list(add_file):
+    global last_id, all_data
+    new_data = []
+
+    with open(add_file, 'r', encoding="utf-8") as f:
+        new_data = [item.strip() for item in f]
+    # print(new_data)  # для проверки
+
+    for item in new_data:
+        last_id += 1
+
+        # item = item.strip()[1:]
+        # print(item) # для проверки
+        all_data.append(f"{last_id} {item.strip()[1:]}")
+
+    # print(all_data) # для проверки
+
+    with open(file_base, 'w', encoding="utf-8") as f:
+        for i in all_data:
+            f.write(f"{i}\n")
+
+# -----------***-------------
 
 
 def main_menu():
@@ -219,9 +246,13 @@ def main_menu():
                 elif choice == "N":
                     choice = input(
                         "Загрузить Список контактов в файл? (Y/N) ").upper()
-                    pass
-                    # if choice == "Y":
-                    #     import_contact_list()
+                    if choice == "Y":
+                        # print(os.path.basename(
+                        #     input("Укажите путь к файлу Contacts.txt для импорта контактов: ")))  # для проверки
+                        import_contact_list(os.path.basename(
+                            input("Укажите путь к файлу Contacts.txt для импорта контактов: ")))
+                        # pass
+
                 else:
                     print("Try again!\n")
             case "7":
