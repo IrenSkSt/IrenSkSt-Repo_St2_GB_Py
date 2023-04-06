@@ -27,7 +27,7 @@ poem = set(input().lower().split())
 # print(poem)  # для проверки
 
 res = set(is_ritm(poem, letters))
-if len(res) == 1 or len(res) == 0:
+if len(res) == 1 and 0 not in res:
     print("Парам пам-пам")  # = OK = Ритм есть
 else:
     print("Пам парам")  # = NO = Ритма нет
